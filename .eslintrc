@@ -5,6 +5,9 @@
     "standard",
     "standard-react"
   ],
+  "globals": {
+    "fetch": true
+  },
   "settings": {
     "react": {
       "version": "16.4"
