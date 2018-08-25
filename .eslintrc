@@ -5,6 +5,9 @@
     "standard",
     "standard-react"
   ],
+  "env": {
+    "jest": true
+  },
   "globals": {
     "fetch": true
   },
