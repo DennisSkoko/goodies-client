@@ -11,6 +11,9 @@
   "globals": {
     "fetch": true
   },
+  "rules": {
+    "react/jsx-filename-extension": 2
+  },
   "settings": {
     "react": {
       "version": "16.4"
