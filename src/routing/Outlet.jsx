@@ -1,15 +1,35 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
-import Browse from '../views/Browse'
-import SignIn from '../views/SignIn'
-import Welcome from '../views/Welcome'
+import Loading from '../components/Loading'
+
+const routes = [
+  {
+    path: '/',
+    exact: true,
+    component: () => import('../views/Welcome')
+  },
+  {
+    path: '/browse',
+    component: () => import('../views/Browse')
+  },
+  {
+    path: '/sign-in',
+    exact: true,
+    component: () => import('../views/SignIn')
+  }
+]
 
 const Outlet = () => (
   <Switch>
-    <Route path='/' exact component={Welcome} />
-    <Route path='/browse' component={Browse} />
-    <Route path='/sign-in' exact component={SignIn} />
+    {routes.map(({ component, ...props }, i) => (
+      <Route
+        key={i}
+        {...props}
+        component={Loadable({ loading: Loading, loader: component })}
+      />
+    ))}
   </Switch>
 )
 
