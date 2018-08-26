@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Navbar from './components/Navbar'
 import Outlet from './routing/Outlet'
 import Router from './routing/Router'
+import ThemeProvider from './style/ThemeProvider'
 
 const links = [
   {
@@ -18,10 +19,12 @@ const links = [
 
 const App = () => (
   <Router>
-    <CssBaseline>
-      <Navbar links={links} />
-      <Outlet />
-    </CssBaseline>
+    <ThemeProvider>
+      <CssBaseline>
+        <Navbar links={links} />
+        <Outlet />
+      </CssBaseline>
+    </ThemeProvider>
   </Router>
 )
 
