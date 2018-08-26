@@ -3,23 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
 import Loading from '../views/Loading'
-
-const routes = [
-  {
-    path: '/',
-    exact: true,
-    component: () => import('../views/Welcome')
-  },
-  {
-    path: '/browse',
-    component: () => import('../views/Browse')
-  },
-  {
-    path: '/sign-in',
-    exact: true,
-    component: () => import('../views/SignIn')
-  }
-]
+import routes from './routes'
 
 const Outlet = () => (
   <Switch>
