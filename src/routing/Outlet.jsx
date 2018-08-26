@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
-import Loading from '../components/Loading'
+import Loading from '../views/Loading'
 
 const routes = [
   {
