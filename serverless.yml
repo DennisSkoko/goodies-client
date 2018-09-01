@@ -1,0 +1,37 @@
+service: goodies-client
+
+provider:
+  name: aws
+  region: ${opt:region, 'eu-central-1'}
+  stage: ${opt:stage, 'dev'}
+  profile: ${opt:profile, 'default'}
+
+resources:
+  Resources:
+    DistBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        VersioningConfiguration:
+          Status: Enabled
+        WebsiteConfiguration:
+          ErrorDocument: index.html
+          IndexDocument: index.html
+
+    DistBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: DistBucket
+        PolicyDocument:
+          Statement:
+            - Sid: DistBucketPolicy
+              Effect: Allow
+              Principal: '*'
+              Action:
+                - s3:GetObject
+              Resource:
+                Fn::Join:
+                  - ''
+                  - - Fn::GetAtt: [DistBucket, Arn]
+                    - '/*'
