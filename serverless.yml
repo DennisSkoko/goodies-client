@@ -135,7 +135,16 @@ resources:
               - ''
               - - Ref: ArtifactStoreProd
                 - /SourceCode
-          BuildSpec: aws/buildspec.yml
+          BuildSpec: |
+            version: 0.2
+            phases:
+              install:
+                commands:
+                  - npm install -g npm
+                  - npm ci
+              build:
+                commands:
+                  - npm run build
 
     CodePipelineProd:
       Type: AWS::CodePipeline::Pipeline
