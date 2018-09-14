@@ -18,6 +18,7 @@ resources:
     DistBucket:
       Type: AWS::S3::Bucket
       Properties:
+        BucketName: ${self:service}-distbucket
         AccessControl: PublicRead
         VersioningConfiguration:
           Status: Enabled
@@ -90,7 +91,7 @@ resources:
                       - - arn:aws:codebuild
                         - Ref: AWS::Region
                         - Ref: AWS::AccountId
-                        - project/${self:service}-build
+                        - project/${self:service}-buildanddeploy
 
           - PolicyName: CloudWatchLogsFullAccess
             PolicyDocument:
@@ -113,10 +114,10 @@ resources:
                   Resource:
                     - arn:aws:logs:*:*:*
 
-    CodeBuild:
+    BuildAndDeploy:
       Type: AWS::CodeBuild::Project
       Properties:
-        Name: ${self:service}-build
+        Name: ${self:service}-buildanddeploy
         Artifacts:
           Type: S3
           Location:
@@ -144,7 +145,11 @@ resources:
                   - npm ci
               build:
                 commands:
+                  - npm run lint
+              post_build:
+                commands:
                   - npm run build
+                  - aws s3 sync ./build s3://${self:service}-distbucket
 
     CodePipelineProd:
       Type: AWS::CodePipeline::Pipeline
@@ -172,7 +177,7 @@ resources:
                 OutputArtifacts:
                   - Name: SourceCode
 
-          - Name: Build
+          - Name: BuildAndDeploy
             Actions:
               - Name: Build
                 ActionTypeId:
@@ -182,8 +187,6 @@ resources:
                   Provider: CodeBuild
                 Configuration:
                   ProjectName:
-                    Ref: CodeBuild
+                    Ref: BuildAndDeploy
                 InputArtifacts:
                   - Name: SourceCode
-                OutputArtifacts:
-                  - Name: BuildCode
