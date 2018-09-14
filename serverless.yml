@@ -11,7 +11,7 @@ custom:
     owner: DennisSkoko
     repo: goodies-client
     branch:
-      prod: dev
+      prod: master
 
 resources:
   Resources:
