@@ -7,6 +7,12 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+const styles = {
+  title: {
+    flexGrow: 1
+  }
+}
+
 const renderLinks = links => links.map(({ title, to }, i) => (
   <Button
     key={i}
@@ -42,12 +48,6 @@ Navbar.propTypes = {
       to: PropTypes.string.isRequired
     }))
     .isRequired
-}
-
-const styles = {
-  title: {
-    flexGrow: 1
-  }
 }
 
 export default withStyles(styles)(Navbar)
