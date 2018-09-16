@@ -10,7 +10,7 @@ import rules from '../util/rules'
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 4
   }
 })
 
