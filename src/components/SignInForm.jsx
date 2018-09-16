@@ -4,6 +4,10 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
 
+import Form from '../components/Form'
+import FormInput from '../components/FormInput'
+import rules from '../util/rules'
+
 const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit * 2
@@ -11,16 +15,37 @@ const styles = theme => ({
 })
 
 class SignInForm extends Component {
+  constructor (props) {
+    super(props)
+
+    this.validators = {
+      email: rules.isEmail(),
+      password: rules.isLength({ min: 6 })
+    }
+  }
+
+  handleSubmit = form => {
+    // TODO: implement
+  }
+
   render () {
     return (
-      <div className={this.props.className}>
-        <TextField
+      <Form
+        className={this.props.className}
+        onSubmit={this.handleSubmit}
+        validators={this.validators}
+      >
+        <FormInput
+          component={TextField}
+          name='email'
           label='Email'
           margin='normal'
           fullWidth
         />
 
-        <TextField
+        <FormInput
+          component={TextField}
+          name='password'
           type='password'
           label='Password'
           margin='normal'
@@ -29,13 +54,14 @@ class SignInForm extends Component {
 
         <Button
           className={this.props.classes.button}
+          type='submit'
           variant='contained'
           color='primary'
           fullWidth
         >
           Sign in
         </Button>
-      </div>
+      </Form>
     )
   }
 }
