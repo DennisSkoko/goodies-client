@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
-import Loading from '../views/Loading'
+import Loading from '../pages/Loading'
 import routes from './routes'
 
 const Outlet = () => (

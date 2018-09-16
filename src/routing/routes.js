@@ -2,15 +2,15 @@ export default [
   {
     path: '/',
     exact: true,
-    component: () => import('../views/Welcome')
+    component: () => import('../pages/Welcome')
   },
   {
     path: '/browse',
-    component: () => import('../views/Browse')
+    component: () => import('../pages/Browse')
   },
   {
     path: '/sign-in',
     exact: true,
-    component: () => import('../views/SignIn')
+    component: () => import('../pages/SignIn')
   }
 ]
