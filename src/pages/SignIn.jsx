@@ -18,7 +18,7 @@ const styles = theme => ({
 
 const SignIn = ({ classes }) => (
   <div className={classes.root}>
-    <Typography align='center' variant='display2'>SignIn</Typography>
+    <Typography align='center' variant='display2'>Sign In</Typography>
     <SignInForm className={classes.form} />
   </div>
 )

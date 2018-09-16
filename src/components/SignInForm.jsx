@@ -51,7 +51,7 @@ class SignInForm extends Component {
           type='password'
           label='Password'
           margin='normal'
-          helperText='Must be atleast 6 characters long'
+          helperText='Must be at least 6 characters long'
           fullWidth
           required
         />
