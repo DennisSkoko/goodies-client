@@ -12,6 +12,11 @@ const createFields = _.mapValues(() => ({
 
 const getAllValues = _.mapValues(_.get('value'))
 
+const makeAllFieldsDirty = _.mapValues(field => ({
+  ...field,
+  dirty: true
+}))
+
 class Form extends Component {
   constructor (props) {
     super(props)
@@ -45,7 +50,7 @@ class Form extends Component {
           ...state.fields,
           [field.name]: {
             valid: this.isFieldValid(field),
-            touched: true,
+            dirty: true,
             value: field.value
           }
         }
@@ -58,6 +63,10 @@ class Form extends Component {
 
     if (this.areAllFieldsValid()) {
       this.props.onSubmit(getAllValues(this.state.fields))
+    } else {
+      this.setState(state => ({
+        fields: makeAllFieldsDirty(state.fields)
+      }))
     }
   }
 
@@ -67,7 +76,11 @@ class Form extends Component {
         handleFieldChange: this.handleFieldChange,
         fields: this.state.fields
       }}>
-        <form className={this.props.className} onSubmit={this.handleOnSubmit}>
+        <form
+          className={this.props.className}
+          onSubmit={this.handleOnSubmit}
+          noValidate
+        >
           {this.props.children}
         </form>
       </Provider>

@@ -40,7 +40,9 @@ class SignInForm extends Component {
           name='email'
           label='Email'
           margin='normal'
+          helperText='Must be a valid email address'
           fullWidth
+          required
         />
 
         <FormInput
@@ -49,7 +51,9 @@ class SignInForm extends Component {
           type='password'
           label='Password'
           margin='normal'
+          helperText='Must be atleast 6 characters long'
           fullWidth
+          required
         />
 
         <Button
