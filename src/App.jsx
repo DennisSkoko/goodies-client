@@ -1,10 +1,12 @@
 import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { ApolloProvider } from 'react-apollo'
 
 import Navbar from './components/Navbar'
 import Outlet from './routing/Outlet'
 import Router from './routing/Router'
 import ThemeProvider from './style/ThemeProvider'
+import client from './lib/graphql'
 
 const links = [
   {
@@ -19,12 +21,14 @@ const links = [
 
 const App = () => (
   <Router>
-    <ThemeProvider>
-      <CssBaseline>
-        <Navbar links={links} />
-        <Outlet />
-      </CssBaseline>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider>
+        <CssBaseline>
+          <Navbar links={links} />
+          <Outlet />
+        </CssBaseline>
+      </ThemeProvider>
+    </ApolloProvider>
   </Router>
 )
 
