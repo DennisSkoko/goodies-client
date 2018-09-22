@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Consumer } from './Form'
 
 const FormInput = ({ name, component: Component, helperText, ...props }) => (
